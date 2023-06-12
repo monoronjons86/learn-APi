@@ -10,6 +10,27 @@ function loadUsers(){
 }
 
 function displayUsers(data){
-    console.log(data);
+    const ul=document.getElementById('users-list');
+    for(const user of data){
+        console.log(user.name);
+        const li=document.createElement('li');
+        li.innerText=user.name;
+        ul.appendChild(li);
+    }
+
+}
+function btnUser(){
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res=>res.json())
+    .then(data=>btnMore(data))
+}
+function btnMore(data){
+    const ul=document.getElementById('users-list');
+    for(const user of data){
+        console.log(user.name);
+        const li=document.createElement('li');
+        li.innerText=user.name;
+        ul.appendChild(li);
+    }
 
 }
