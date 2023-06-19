@@ -34,11 +34,28 @@ const displayCountries=countries=>{
         countryDiv.classList.add('country')
         countryDiv.innerHTML=`
         <h3>Name:${country.name.common}</h3>
+        <button onclick="loadCountryDetails('${country.cca2}')">Details</button>
         `;
         ContainerCountries.appendChild(countryDiv)
     }
 
     )
 
+}
+const loadCountryDetails=code=>{
+    //https://restcountries.com/v3.1/alpha/{code}
+    const url=`https://restcountries.com/v3.1/alpha/${code}`
+    // console.log(url);
+    fetch(url)
+    .then(res=>res.json())
+    .then(data=>showCountryDetails(data[0]))
+}
+const showCountryDetails=country=>{
+    // console.log(country)
+    const detailsContainer=document.getElementById('country-details');
+    detailsContainer.innerHTML=`
+    <h3>Name:${country.name.common}</h3>
+    <img src="${country.flags.png}">
+    `
 }
 loadCountries()
